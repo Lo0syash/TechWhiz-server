@@ -1,0 +1,559 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+    transition: background-color 0s 600000s, color 0s 600000s !important;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+}
+
+.container {
+    @apply max-w-[1567px] mx-auto;
+}
+
+.header--container {
+    @apply py-[43px];
+}
+
+@media (max-width: 1567px) {
+    .header__inner {
+        margin: 0 2rem;
+    }
+}
+
+@media (max-width: 860px) {
+    .header__inner {
+        margin: 0 2rem;
+        flex-direction: column;
+    }
+
+    .menu-container--top {
+        border-bottom: 1px solid #eee;
+        padding-bottom: 2rem;
+        @apply flex justify-between items-center w-full;
+    }
+
+    .menu-container {
+        position: absolute;
+        left: -100%;
+        top: 19%;
+        transition: left .5s ease-in-out;
+
+        &.active {
+            left: 20%;
+            z-index: 99;
+        }
+    }
+
+    .bannerLogotypeImage {
+        @apply absolute top-0 right-32 z-10 opacity-30 rotate-45 transition-all duration-500;
+    }
+
+    .completeToPage-inner {
+        .flex.flex-col {
+            @apply relative z-30;
+        }
+
+        .bannerLogotypeImage {
+            right: 0;
+            left: 0;
+        }
+    }
+}
+
+@media (max-width: 680px) {
+    .section--container-partner {
+        bottom: -22vh !important;
+    }
+}
+
+@media (max-width: 550px) {
+    /*.section--container-partner {*/
+    /*    bottom: -10vh !important;*/
+    /*}*/
+    .menu-container {
+        &.active {
+            left: 8vw;
+        }
+    }
+
+    .invite {
+        padding-top: 0;
+    }
+}
+
+
+.section--container-partner {
+    @apply flex items-center justify-between absolute z-50 top-[35rem] gap-10;
+}
+
+.partner {
+    .pc-version {
+        @apply flex;
+    }
+
+    .mb-version {
+        @apply hidden;
+    }
+}
+
+@media (max-width: 1390px) {
+    .partner {
+        .pc-version {
+            @apply hidden;
+        }
+    }
+}
+
+@media (max-width: 900px) {
+    .team-TechWhiz {
+        padding-top: 35px;
+        height: 700px;
+    }
+    .partner {
+
+        .partnerContainer {
+            justify-content: center;
+        }
+
+        .mb-version {
+            position: relative;
+            top: 0;
+            margin: 0;
+            padding: 0;
+            .section--container-partner--c {
+                @apply gap-5 flex;
+                flex-direction: column;
+                svg {
+                    width: fit-content;
+                }
+                .containerP {
+                    max-width: 85vw;
+                    .containerP-text {
+                        padding-left: 1.6rem;
+                        p{
+                            font-size: 1.3rem;
+                        }
+                        a{
+                            max-width: 50vw;
+                            white-space: nowrap;
+                        }
+                    }
+                }
+                /*@apply gap-52 flex;*/
+            }
+        }
+    }
+}
+
+@media (max-width: 1300px) {
+    .banner-inner {
+        gap: 0;
+    }
+
+    .banner-inner, .completeToPage-inner {
+
+        h1, h2 {
+            @apply text-[50px] max-w-[600px];
+        }
+    }
+
+    .team-TechWhiz, .invite {
+        h2 {
+            @apply text-[40px] max-w-[500px];
+        }
+    }
+}
+
+/*@media (max-width: 550px) {*/
+/*    .banner-inner {*/
+/*        margin-top: 30px;*/
+/*    }*/
+/*}*/
+
+@media (max-width: 1300px) {
+    .banner-inner, .completeToPage-inner {
+        img {
+            height: 400px;
+        }
+
+        h1, h2 {
+            @apply text-[45px] leading-[50px] max-w-fit;
+        }
+    }
+}
+
+@media (max-width: 1260px) {
+    .team-TechWhiz {
+        @apply mt-[5vh];
+    }
+}
+
+@media (max-height: 824px) {
+    .section--container-partner {
+        bottom: -10vh;
+    }
+}
+
+.bannerBackgroundImage {
+    @apply w-full h-full absolute right-0 top-0 z-0 opacity-50;
+    background: url("/resources/assets/images/banner-background.png") no-repeat right top;
+}
+
+.title {
+    @apply font-bold text-[64px] leading-[74px] mt-4 mb-[51px] max-w-[747px];
+}
+
+.subTitle {
+    @apply text-[#616161] font-medium text-[24px] leading-[64p];
+}
+
+.m-slide {
+    width: 517px;
+    height: 239px !important;
+    border-radius: 14px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(220deg, rgba(220, 220, 220, .42), rgb(220, 220, 220));
+}
+
+.swiper-slide {
+    @apply h-[140px] relative hover:scale-95 duration-500;
+}
+
+@media (min-width: 960px) {
+    .section--container-partner {
+        @apply justify-center -bottom-52;
+    }
+}
+
+@media (min-width: 820px) {
+    .swiper-slide {
+        width: 423px !important;
+    }
+}
+
+.benefit-list {
+    animation: benefit-list-carousel 60s linear infinite;
+}
+
+@keyframes benefit-list-carousel {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.m-slide, .opportunitiesSlides {
+    img {
+        transition: top .5s ease-in-out;
+    }
+
+    p {
+        transition: opacity .5s ease-in-out;
+        opacity: 0;
+    }
+}
+
+.m-slide:hover, .opportunitiesSlides:hover {
+    img {
+        top: 30%;
+    }
+
+    p {
+        opacity: 1;
+    }
+}
+
+@keyframes animSlide {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-100% - 85px));
+    }
+}
+
+.opportunitiesSlides {
+    @apply w-[458px] h-[258px] rounded-[14px];
+    background: #6C6C6C;
+
+    &:nth-child(2n) {
+        background: rgba(108, 108, 108, .5);
+    }
+}
+
+@media (max-width: 1465px) {
+    .opportunitiesSlides {
+        &:nth-child(2n) {
+            background: rgba(108, 108, 108);
+        }
+    }
+}
+
+.bckLogotype {
+    transition: left .5s ease-in-out;
+    @apply absolute z-20 -bottom-40 w-[906px] h-[1207px] opacity-25 rotate-45 left-[30vw];
+}
+
+@media (max-width: 1470px) {
+    .bckLogotype {
+        @apply left-0;
+    }
+}
+
+@media (max-width: 460px) {
+    .section--container-partner {
+        bottom: -35vh !important;
+    }
+
+    .m-slide, .opportunitiesSlides {
+        width: 85vw;
+
+        p {
+            font-size: 1.2rem;
+            max-width: 70vw;
+        }
+    }
+
+    .bannerLogotypeImage {
+        left: 0;
+        right: 0;
+    }
+
+    .menu-container {
+        &.active {
+            left: 3vw;
+        }
+
+        .menu {
+            a {
+                &:nth-child(2) {
+                    width: 250px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1560px) {
+    .banner .container .banner-inner {
+        @apply mx-10;
+    }
+
+    .completeToPage .container .completeToPage-inner {
+        @apply mx-10;
+    }
+}
+
+@media (max-width: 420px) {
+    .section--container-partner {
+        bottom: -15vh !important;
+    }
+
+    .team-TechWhiz, .invite {
+        h2 {
+            font-size: 1.8rem;
+            max-width: 80vw;
+        }
+
+        p {
+            font-size: 1.2rem;
+        }
+    }
+
+    .bannerLogotypeImage {
+        height: 350px;
+        left: 1rem;
+    }
+
+    .banner-inner, .completeToPage-inner {
+        img {
+            height: 350px;
+        }
+    }
+
+    .banner-inner {
+        h1 {
+            font-size: 35px;
+        }
+    }
+
+    .completeToPage-inner {
+        h2 {
+            font-size: 35px;
+        }
+    }
+
+    .banner .container .banner-inner {
+        margin-left: 1rem;
+    }
+
+    .completeToPage .container .completeToPage-inner {
+        margin-left: 1rem;
+    }
+
+    header {
+        .menu-container {
+            left: -150%;
+
+            a {
+                font-size: 17px;
+
+                &:nth-child(1) {
+                    width: 110px;
+                }
+
+                &:nth-child(2) {
+                    width: 225px !important;
+                }
+            }
+        }
+    }
+
+    .section--container-partner {
+        bottom: -24vh !important;
+    }
+}
+
+@media (max-width: 380px) {
+    .section--container-partner {
+        bottom: -50vh !important;
+    }
+
+    .team-TechWhiz, .invite {
+        p {
+            line-height: 30px;
+
+        }
+    }
+}
+
+@media (max-width: 320px) {
+    .header__inner {
+        margin: 0 1rem;
+
+        button {
+            font-size: 18px;
+            width: 110px;
+        }
+    }
+
+    .banner-inner {
+        p {
+            font-size: 18px;
+        }
+
+        h1 {
+            font-size: 25px;
+        }
+
+        img {
+            height: 270px;
+        }
+    }
+
+    .section--container-partner {
+        bottom: -25vh !important;
+    }
+
+    .completeToPage-inner {
+        p {
+            font-size: 18px;
+        }
+
+        h2 {
+            font-size: 25px;
+        }
+
+        img {
+            height: 270px;
+            left: 1rem !important;
+        }
+    }
+
+    .m-slide, .opportunitiesSlides {
+        p {
+            max-width: 75vw;
+        }
+    }
+
+    header {
+        .menu-container.active {
+            width: 100%;
+            left: 0;
+            padding: 30px;
+            top: 16%;
+            background: #ececec;
+            z-index: 99;
+
+            div {
+                flex-direction: column;
+                align-items: start;
+            }
+        }
+    }
+}
+
+.decorticationElement {
+    @apply w-full h-full fixed right-0 top-0 z-0 opacity-50;
+    background: url("/resources/assets/images/banner-background.png") no-repeat right top;
+}
+
+.auth {
+    form {
+        label {
+            transition: all .5s ease-in-out;
+        }
+
+        input:focus + label {
+            left: 0;
+            top: -10px;
+            transform: scale(.7);
+        }
+
+        .label {
+            &.active {
+                left: 0;
+                top: -10px;
+                transform: scale(.7);
+            }
+        }
+
+        input:focus + label[for="input-re_password"] {
+            left: -1rem;
+        }
+    }
+}
+
+@media (max-width: 410px) {
+    .auth {
+        input {
+            width: 85vw;
+        }
+    }
+}
+
+.menu-container--top {
+    button {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .menu-container--top {
+        display: flex;
+    }
+    .textContainerAfterParthner {
+        max-width: 90vw;
+    }
+}
