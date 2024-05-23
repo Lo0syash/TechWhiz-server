@@ -11,8 +11,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <title>@yield('title')</title>
-    @vite('resources/css/app.css')
-    @vite('resources/js/app.js')
+    <link rel="stylesheet" href="{{asset('public/assets/app-8f9e4b88.css')}}">
+    <script src="{{asset('public/assets/app-5f39cc03.js')}}" defer></script>
 </head>
 <body class="body flex flex-col !h-screen">
     @include('components.header')

@@ -11,8 +11,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <title>@yield('lk-title')</title>
-    @vite('resources/css/app-lk.css')
-    @vite('resources/js/app-lk.js')
+    <link rel="stylesheet" href="{{asset('public/assets/build/app-8f9e4b88.css')}}">
+    <script src="{{asset('public/assets/build/app-5f39cc03.js')}}" defer></script>
 </head>
 <body class="body">
 @include('components.lk-header')
