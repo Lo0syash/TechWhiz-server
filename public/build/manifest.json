@@ -1,0 +1,16 @@
+{
+  "resources/assets/images/banner-background.png": {
+    "file": "assets/banner-background-ed5f8908.png",
+    "src": "resources/assets/images/banner-background.png"
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-8f9e4b88.css",
+    "isEntry": true,
+    "src": "resources/css/app.css"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-5f39cc03.js",
+    "isEntry": true,
+    "src": "resources/js/app.js"
+  }
+}
