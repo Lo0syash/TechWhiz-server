@@ -2,13 +2,20 @@
 @section('lk-title', 'TechWhiz')
 @section('lk-content')
     <section class="mb-[3rem]">
-        <div class="container">
+        <style>
+            @media(max-width: 500px) {
+                .profile-content {
+                    max-width: 300px !important;
+                }
+            }
+        </style>
+        <div class="container" style="max-width: 1680px;">
             <div class="profile__inner flex justify-between flex-wrap">
                 <div class="dashboard">
                     <div class="dashboard__inner relative w-[617px] pb-[40px] bg-[#CEA3EF] rounded-[20px]">
                         <img class="absolute -right-2 -top-2" src="/resources/assets/images/lk/profile-badge.svg"
                              alt="badge">
-                        <div class="flex flex-col pt-[30px] pl-[40px]">
+                        <div class="flex flex-col pt-[30px] pl-[40px] profile-content">
                             <p class="font-bold text-[20px] text-black">Ваши данные</p>
                             <h1 class="max-w-[504px] text-[28px] text-black font-medium mt-8 mb-8 leading-[136%]">{{auth()->user()->surname}} {{auth()->user()->name}}</h1>
                             <div class="flex flex-col gap-[14px]">
@@ -20,7 +27,7 @@
                                 @endif
                             </div>
                         </div>
-                        <a href="#" class="absolute right-[40px] bottom-[40px]">
+                        <a href="{{route('setting')}}" class="absolute right-[40px] bottom-[40px]">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                  fill="none">
                                 <path
@@ -35,7 +42,7 @@
                                 <img src="/resources/assets/images/icons/headset-mic.png" alt="Техподдержка">
                                 <p class="text-white text-[20px] font-medium">Техподдержка</p>
                             </div>
-                            <a href="#" class="btn flex items-center justify-center w-[184px] h-[44px] rounded-[10px] hover:scale-95 duration-500">Связаться</a>
+                            <a href="#" class="btn flex items-center justify-center w-[184px] h-[44px] rounded-[10px] hover:scale-95 duration-500" style="background-color: #1BD39E;">Связаться</a>
                         </div>
                         <div class="dashboard__inner--block w-[617px] h-20 bg-[#3A3A3A] px-[40px] flex justify-between items-center rounded-[20px]">
                             <div class="flex items-center gap-[25px]">
@@ -44,7 +51,7 @@
                             </div>
                             <form action="{{route('logout')}}" method="post">
                                 @csrf
-                                <button type="submit" class="btn w-[184px] h-[44px] rounded-[10px] hover:scale-95 duration-500">Выйти</button>
+                                <button type="submit" class="btn w-[184px] h-[44px] rounded-[10px] hover:scale-95 duration-500" style="background-color: #1BD39E;">Выйти</button>
                             </form>
                         </div>
                     </div>
@@ -59,31 +66,31 @@
                         </div>
                     </div>
                 </div>
-                <div>
+                <div class="task-block" style="width: 963px;">
                     <div>
                         <div class="flex flex-col gap-[50px]">
-                            <h2 class="dashboard-title font-medium text-4xl leading-3 mb-[20px] text-white">Задачи с горящим дедлайном</h2>
-                            <a href="#" class="flex flex-col gap-4 max-h-[416px] overflow-auto">
-                                <div class="task-block relative w-[963px] gap-[25px] rounded-[20px] bg-[#3A3A3A] py-[30px] px-[55px] flex items-center">
-                                    <div class="task-block--image max-w-[120px] w-[120px] max-h-[120px] h-[120px] object-contain bg-red-500 rounded-2xl"></div>
-                                    <div class="task-block--content flex flex-col gap-[13px]">
-                                        <h3 class="task-block--title max-w-[448px] leading-[110%] text-white text-[28px]">Название афигенного и незаменимого курса Паутины</h3>
-                                        <p class="leading-[136%] max-w-[700px] text-[16px] text-[#DCDCDC]">Название афигенного и незаменимого курса Паутины и где здесь четко и подробно говорится о том, что будет в курсе, а может и нет, а может и да.</p>
-                                    </div>
-                                    <div class="text-link absolute cursor-pointer top-[30px] right-[50px] text-[#20BE91] font-bold text-[20px] hover:text-[#00F3AD] duration-500">Подробнее</div>
-                                </div>
-                            </a>
-                            <h2 class="dashboard-title font-medium text-4xl leading-3 mb-[20px] text-white">Прочие задачи</h2>
-                            <a href="#" class="flex flex-col gap-4 max-h-[416px] overflow-auto">
-                                <div class="task-block relative w-[963px] gap-[25px] rounded-[20px] bg-[#3A3A3A] py-[30px] px-[55px] flex items-center">
-                                    <div class="task-block--image max-w-[120px] w-[120px] max-h-[120px] h-[120px] object-contain bg-red-500 rounded-2xl"></div>
-                                    <div class="task-block--content flex flex-col gap-[13px]">
-                                        <h3 class="task-block--title max-w-[448px] leading-[110%] text-white text-[28px]">Название афигенного и незаменимого курса Паутины</h3>
-                                        <p class="leading-[136%] max-w-[700px] text-[16px] text-[#DCDCDC]">Название афигенного и незаменимого курса Паутины и где здесь четко и подробно говорится о том, что будет в курсе, а может и нет, а может и да.</p>
-                                    </div>
-                                    <div class="text-link absolute cursor-pointer top-[30px] right-[50px] text-[#20BE91] font-bold text-[20px] hover:text-[#00F3AD] duration-500">Подробнее</div>
-                                </div>
-                            </a>
+                            <h2 class="dashboard-title font-medium text-4xl leading-3 mb-[20px] text-white">Мои группы</h2>
+                            @if($groups->count() > 0)
+                                @foreach($groups->all() as $item)
+                                    <a href="{{route('group', $item->id)}}" class="flex flex-col gap-4 max-h-[416px] overflow-auto">
+                                        <div class="task-block relative w-[963px] gap-[25px] rounded-[20px] bg-[#3A3A3A] py-[30px] px-[55px] flex items-center">
+                                            <div class="task-block--image max-w-[120px] w-[120px] max-h-[120px] h-[120px] object-contain rounded-2xl">
+                                                <img
+                                                    src="{{ asset('public' . \Illuminate\Support\Facades\Storage::url($item->path)) }}"
+                                                    alt="{{ $item->name }}"
+                                                    class="object-contain">
+                                            </div>
+                                            <div class="task-block--content flex flex-col gap-[13px]">
+                                                <h3 class="task-block--title max-w-[448px] leading-[110%] text-white text-[28px]">{{$item->name}}</h3>
+                                                <p class="leading-[136%] max-w-[700px] text-[16px] text-[#DCDCDC]">{{$item->shortDescription}}</p>
+                                            </div>
+                                            <div class="text-link absolute cursor-pointer top-[30px] right-[50px] text-[#20BE91] font-bold text-[20px] hover:text-[#00F3AD] duration-500">Подробнее</div>
+                                        </div>
+                                    </a>
+                                @endforeach
+                                @else
+                                <p class="text-white text-2xl font-medium">Вы не состоите в группах</p>
+                            @endif
                         </div>
                     </div>
                 </div>

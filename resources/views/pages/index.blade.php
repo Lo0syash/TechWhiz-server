@@ -6,7 +6,7 @@
         <div class="container">
             <div class="banner-inner relative flex items-center mt-[78px] justify-center gap-[184px]" style="z-index: 70">
                 <div
-                    class="flex flex-col relative">
+                    class="flex flex-col relative" style="z-index: 99;">
                     <p class="text-[#616161] font-medium text-[24px] leading-[64px]">Присоединяйтесь уже сейчас</p>
                     <h1
                         class="font-bold text-[64px] leading-[74px] mt-4 mb-[51px] max-w-[747px] text-[#333333]"
@@ -326,7 +326,7 @@
                     class='font-bold text-[64px] max-w-[715px] text-center text-white leading-[123%] mt-[40px]'>
                     Откройте для себя новые возможности
                 </h2>
-                <a href="#"
+                <a href="{{route('login')}}"
                    class="font-bold text-[19px] w-[231px] h-[59px] bg-white text-[#333333] flex items-center justify-center
                             rounded-3xl cursor-pointer transition hover:bg-[#2e2b34] hover:text-white my-[62px]"
                 >Присоединиться

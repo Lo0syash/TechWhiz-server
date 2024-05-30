@@ -1,6 +1,19 @@
 @extends('layouts.lk')
 @section('lk-title', 'TechWhiz')
 @section('lk-content')
+    <style>
+        input:focus, textarea:focus{
+            --tw-ring-color: #1BD39E !important;
+            border-color: #1BD39E !important;
+        }
+        .input-lockStyles {
+            border: 0 !important;
+            outline: none !important;
+        }
+        .input-lockStyles:focus {
+            box-shadow: none !important;
+        }
+    </style>
     <section class="mb-14">
         <div class="createGroup__container">
             <h1 class="text-white text-[60px] font-medium mb-[20px]">Создание группы</h1>
@@ -46,7 +59,7 @@
                     <div
                         class="inviteCodeInput--container w-[425px] h-[65px] rounded-[20px] border-[#4D4D4D] border flex items-center justify-center pl-[30px] pr-[6px] gap-[41px]">
                         <input type="text" name="inviteCode" placeholder="Код" readonly {{@old('inviteCode')}}
-                               class="inviteCode--input max-w-[164px] text-[#7C7C7C] text-[20px] font-medium bg-transparent outline-none">
+                               class="inviteCode--input max-w-[164px] text-[#7C7C7C] text-[20px] font-medium bg-transparent outline-none input-lockStyles">
                         <div
                             class="btn-generateCode w-[184px] h-[53px] rounded-[20px] bg-[#1BD39E] text-black flex items-center justify-center text-[20px] font-medium cursor-pointer">
                             Обновить

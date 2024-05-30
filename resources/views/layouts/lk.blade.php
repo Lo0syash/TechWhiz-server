@@ -11,8 +11,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <title>@yield('lk-title')</title>
-    <link rel="stylesheet" href="{{asset('public/assets/build/app-8f9e4b88.css')}}">
-    <script src="{{asset('public/assets/build/app-5f39cc03.js')}}" defer></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
+    <link rel="stylesheet" href="{{asset('public/assets/lk/app-8f9e4b88.css')}}">
+    <script src="{{asset('public/assets/lk/app-5f39cc03.js')}}" defer></script>
 </head>
 <body class="body">
 @include('components.lk-header')

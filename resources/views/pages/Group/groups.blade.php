@@ -1,8 +1,28 @@
 @extends('layouts.lk')
 @section('lk-title', 'TechWhiz')
 @section('lk-content')
+    <style>
+        input {
+            border: 0 !important;
+            outline: none !important;
+        }
+        input:focus {
+            outline: none !important;
+            border: 0 !important;
+            box-shadow: none !important;
+        }
+        .confirmationColor {
+            background: rgb(35, 35, 35);
+        }
+        .completeHover-styles {
+            transition: box-shados .5s ease;
+        }
+        .completeHover-styles:hover {
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+    </style>
     <section class="mb-14">
-        <div class="container">
+        <div class="container" style="max-width: 1680px;">
             <div class="flex flex-col gap-20">
                 <div class="flex items-center justify-between func-content">
                     <div class="func-content--box flex items-center gap-10 md:gap-[53px] lg:flex-row flex-col-reverse">
@@ -117,20 +137,20 @@
     </section>
     <div id="confirmationForm"
          class="hidden fixed top-0 left-0 w-screen h-screen bg-black bg-opacity-50 flex items-center justify-center">
-        <div class="bg-white p-6 rounded-md shadow-md">
-            <p id="confirmationText"></p>
+        <div class="confirmationColor p-6 rounded-xl shadow-md">
+            <p id="confirmationText" class="text-white"></p>
             <div class="mt-4 flex justify-end">
-                <button onclick="hideConfirmationForm()" class="px-4 py-2 bg-gray-200 rounded-md mr-2">Отмена</button>
-                <a id="confirmLink" href="#" class="px-4 py-2 bg-[#1BD39E] text-white rounded-md">Подтвердить</a>
+                <button onclick="hideConfirmationForm()" class="px-4 py-2 bg-gray-200 rounded-md mr-2 font-medium completeHover-styles">Отмена</button>
+                <a id="confirmLink" href="#" class="px-4 py-2 bg-[#1BD39E] text-white rounded-md font-medium completeHover-styles">Подтвердить</a>
             </div>
         </div>
     </div>
     <div id="acceptedForm"
          class="hidden fixed top-0 left-0 w-screen h-screen bg-black bg-opacity-50 flex items-center justify-center">
-        <div class="bg-white p-6 rounded-md shadow-md">
-            <p id="acceptedText"></p>
+        <div class="confirmationColor p-6 rounded-xl shadow-md">
+            <p id="acceptedText" class="text-white"></p>
             <div class="mt-4 flex justify-end">
-                <div onclick="hiddenAcceptedFormLink()" class="px-4 py-2 bg-[#1BD39E] text-white rounded-md cursor-pointer">Подтвердить</div>
+                <div onclick="hiddenAcceptedFormLink()" class="px-4 py-2 bg-[#1BD39E] text-white rounded-md cursor-pointer font-medium completeHover-styles">Подтвердить</div>
             </div>
         </div>
     </div>
