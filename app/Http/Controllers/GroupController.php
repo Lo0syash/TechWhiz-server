@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\DB;
 
 class GroupController extends Controller
 {
+
     public function create()
     {
         return view('pages.Group.createGroup');
@@ -64,7 +65,7 @@ class GroupController extends Controller
             ->pluck('balance', 'user_id');
 
             return view('pages.Group.oneGroup', compact('transactions', 'group', 'groupMemberCounts', 'memberGroups', 'users', 'author', 'userApplication', 'balance', 'usersBalances', 'userBalance'));
-        }
+    }
 
     public function createGroupPostRequest(CreateGroup $request)
     {
@@ -163,5 +164,12 @@ class GroupController extends Controller
         } else {
             return redirect()->route('group', $group);
         }
+    }
+
+    public function deleteUserGroup($group, $user) {
+        UsersGroups::where('user_id', $user)
+            ->where('group_id', $group)
+            ->delete();
+        return redirect()->route('group', $group);
     }
 }

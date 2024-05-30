@@ -121,7 +121,7 @@
                                                     <button type="submit" class="w-[220px] h-[56px] rounded-[15px] bg-[#CDA3EF] font-medium text-[20px] text-black self-center mt-[33px]">Выполнить</button>
                                                 </form>
                                                 @if(auth()->user()->id !== $checkUser->id)
-                                                    <form action="{{route('')}}" method="post" class="flex">
+                                                    <form action="{{route('deleteUserGroup', ['group' => $group->id, 'user' => $checkUser->id])}}" method="post" class="flex">
                                                         @csrf
                                                         <input type="hidden" name="id">
                                                         <button type="submit">
