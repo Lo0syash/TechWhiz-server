@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('description');
             $table->string('price');
+            $table->string('status');
             $table->foreignId('group_id')->constrained('groups');
             $table->timestamps();
         });

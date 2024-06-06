@@ -1,6 +1,7 @@
 import Swiper from "swiper";
 import ScrollReveal from "scrollreveal";
 
+
 const swiper = new Swiper('.swiper', {
     allowTouchMove: false,
     breakpoints: {

@@ -16,7 +16,7 @@
                 <a href="{{route('groups')}}" class="font-medium text-[20px] text-[#A9A9A9] <?=($currentRoute == 'groups' || $currentRoute == 'groups/create' || $currentRoute == 'group') ? 'activePage' : ''?>">Группы</a>
                 <a href="{{route('profile')}}" class="font-medium text-[20px] text-[#A9A9A9] <?=($currentRoute == 'profile' || $currentRoute == 'profile/setting') ? 'activePage' : ''?>">Профиль</a>
                 @if(auth()->user()->role_id == 1)
-                    <a href="{{route('admin')}}" class="font-medium text-[20px] text-[#A9A9A9]">Админ панель</a>
+                    {{-- <a href="{{route('admin')}}" class="font-medium text-[20px] text-[#A9A9A9]">Админ панель</a> --}}
                 @endif
             </div>
         </div>

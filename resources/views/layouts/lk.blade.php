@@ -14,11 +14,14 @@
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
     <link rel="stylesheet" href="{{asset('public/assets/lk/app-8f9e4b88.css')}}">
     <script src="{{asset('public/assets/lk/app-5f39cc03.js')}}" defer></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
 </head>
 <body class="body">
 @include('components.lk-header')
 <main>
     @yield('lk-content')
 </main>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 </body>
 </html>

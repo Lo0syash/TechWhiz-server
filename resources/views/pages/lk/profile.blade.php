@@ -42,7 +42,7 @@
                                 <img src="/resources/assets/images/icons/headset-mic.png" alt="Техподдержка">
                                 <p class="text-white text-[20px] font-medium">Техподдержка</p>
                             </div>
-                            <a href="#" class="btn flex items-center justify-center w-[184px] h-[44px] rounded-[10px] hover:scale-95 duration-500" style="background-color: #1BD39E;">Связаться</a>
+                            <a href="mailto:offtechwhiz@gmail.com" class="btn flex items-center justify-center w-[184px] h-[44px] rounded-[10px] hover:scale-95 duration-500" style="background-color: #1BD39E;">Связаться</a>
                         </div>
                         <div class="dashboard__inner--block w-[617px] h-20 bg-[#3A3A3A] px-[40px] flex justify-between items-center rounded-[20px]">
                             <div class="flex items-center gap-[25px]">
@@ -55,7 +55,7 @@
                             </form>
                         </div>
                     </div>
-                    <div class="relative dashboard__inner--block w-[617px] pb-[35px] bg-[#CEA3EF] rounded-[20px]">
+                    {{-- <div class="relative dashboard__inner--block w-[617px] pb-[35px] bg-[#CEA3EF] rounded-[20px]">
                         <img class="absolute -right-2 -top-2" src="/resources/assets/images/lk/poitnts-badge.svg"
                              alt="badge">
                         <div class="flex flex-col pt-[30px] pl-[40px]">
@@ -64,7 +64,7 @@
                                 <p class="font-medium text-[20px] text-black">Баллы: 0</p>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="task-block" style="width: 963px;">
                     <div>

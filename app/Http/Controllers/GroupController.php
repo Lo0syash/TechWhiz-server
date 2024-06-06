@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Group\CreateGroup;
 use App\Http\Requests\Group\UpdateGroup;
+use App\Http\Requests\Task\CreateTaskRequest;
 use App\Models\ApplicationForMemdership;
 use App\Models\Group;
+use App\Models\Tasks;
+use App\Models\TasksUser;
 use App\Models\Transactions;
 use App\Models\User;
 use App\Models\UsersGroups;
@@ -19,6 +22,124 @@ class GroupController extends Controller
     public function create()
     {
         return view('pages.Group.createGroup');
+    }
+
+    public function tasks(Group $group)
+    {
+        $authorCheckGroup = UsersGroups::where('group_id', $group->id)->where('role', 1)->get();
+        $author = User::whereIn('id', $authorCheckGroup->pluck('user_id'))->get()->keyBy('id');
+
+        $groupTasks = Tasks::where('group_id', $group->id)->get();
+
+
+        return view('pages.Group.tasks', compact('group', 'author', 'groupTasks'));
+    }
+
+    public function task(Group $group, Tasks $task)
+    {
+        $task = Tasks::where('group_id', $group->id)->where('id', $task->id)->firstOrFail();
+        $someGroup = Group::where('id', $group->id)->firstOrFail();
+
+        return view('pages.Group.task', compact('someGroup', 'task'));
+    }
+
+    public function createTask(Group $group)
+    {
+        return view('pages.Group.createTask', compact('group'));
+    }
+
+    public function createSomeTask(CreateTaskRequest $createTaskRequest, Group $group) {
+        $data = $createTaskRequest->validated();
+        $data['status'] = '1';
+        $data['group_id'] = $group->id;
+        Tasks::query()->create($data);
+        return redirect()->route('tasks', $group->id);
+    }
+
+    public function adminGroupTasks(Group $group)
+    {
+        $tasksUsers = TasksUser::where('groups_id', $group->id)->where('status', 'pending')->get();
+
+        $userIds = $tasksUsers->pluck('user_id')->unique();
+        $users = User::whereIn('id', $userIds)->get();
+
+        $userBalances = Transactions::where('groups_id', $group->id)
+            ->whereIn('user_id', $userIds)
+            ->select('user_id', \DB::raw('SUM(sum) as balance'))
+            ->groupBy('user_id')
+            ->get()
+            ->pluck('balance', 'user_id');
+
+        return view('pages.Group.adminGroupTasks', compact('group', 'users', 'userBalances', 'tasksUsers'));
+    }
+
+    public function adminGroupTasksMore(Tasks $task, Group $group)
+    {
+        $taskData = TasksUser::where('tasks_id', $task->id)->firstOrFail();
+
+        $userId = $taskData->user_id;
+        $userCheck = User::where('id', $userId)->firstOrFail();
+
+        $imagePaths = json_decode($taskData->image_paths);
+
+        return view('pages.Group.adminGroupTasksMore', compact('taskData', 'group', 'userCheck', 'imagePaths'));
+    }
+
+    public function acceptSubmitTask(TasksUser $task, User $user)
+    {
+        $taskData = TasksUser::where('id', $task->id)->where('user_id', $user->id)->firstOrFail();
+        $taskData->status = 'true';
+        $taskData->save();
+
+        $checkTask = Tasks::where('id', $taskData->tasks_id)->firstOrFail();
+
+        $transactions = new Transactions();
+        $transactions->user_id = $user->id;
+        $transactions->groups_id = $taskData->groups_id;
+        $transactions->sum = $checkTask->price;
+        $transactions->description = $checkTask->name;
+        $transactions->tasks = $taskData->id;
+
+        $transactions->save();
+
+        return redirect()->route('adminGroupTasks', $taskData->groups_id);
+    }
+
+    public function closeSubmitTask(TasksUser $task, User $user)
+    {
+        $taskData = TasksUser::where('id', $task->id)->where('user_id', $user->id)->firstOrFail();
+        $taskData->status = 'false';
+        $taskData->save();
+        return redirect()->route('adminGroupTasks', $taskData->groups_id);
+    }
+
+    public function submitTaskAnswer(Request $request, Group $group, Tasks $task)
+    {
+        $validatedData = $request->validate([
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:5120',
+            'description' => 'required|string|max:255',
+        ]);
+
+        $taskUser = new TasksUser();
+        $taskUser->user_id = auth()->user()->id;
+        $taskUser->groups_id = $group->id;
+        $taskUser->tasks_id = $task->id;
+        $taskUser->status = 'pending';
+        $taskUser->description = $request->description;
+
+        if ($request->hasFile('images')) {
+            $imagePaths = [];
+            foreach ($request->file('images') as $image) {
+                $imageName = time().'_'.$image->getClientOriginalName();
+                $image->move(public_path('images'), $imageName);
+                $imagePaths[] = '/images/'.$imageName;
+            }
+            $taskUser->image_paths = json_encode($imagePaths);
+        }
+
+        $taskUser->save();
+
+        return redirect()->route('tasks', $group->id);
     }
 
     public function groups(Request $request, UsersGroups $usersGroups, ApplicationForMemdership $applicationForMemdership)
@@ -64,7 +185,14 @@ class GroupController extends Controller
             ->groupBy('user_id')
             ->pluck('balance', 'user_id');
 
-            return view('pages.Group.oneGroup', compact('transactions', 'group', 'groupMemberCounts', 'memberGroups', 'users', 'author', 'userApplication', 'balance', 'usersBalances', 'userBalance'));
+        $sortedUsers = $memberGroups->sortByDesc(function ($memberGroup) use ($usersBalances) {
+            return $usersBalances->get($memberGroup->user_id, 0);
+        });
+
+        $activeUserId = auth()->user()->id;
+        $activeUserPosition = $sortedUsers->pluck('user_id')->search($activeUserId) + 1;
+
+        return view('pages.Group.oneGroup', compact('transactions', 'group', 'groupMemberCounts', 'memberGroups', 'users', 'author', 'userApplication', 'balance', 'usersBalances', 'userBalance', 'sortedUsers', 'activeUserPosition'));
     }
 
     public function createGroupPostRequest(CreateGroup $request)
