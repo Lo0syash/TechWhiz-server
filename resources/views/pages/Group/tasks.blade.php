@@ -11,6 +11,10 @@
             body {
                 overflow-x: hidden !important;
             }
+            
+            .someTask p {
+                height: 60px;
+            }
 
             @media (max-width: 1540px) {
                 .tasksContainer {
@@ -28,6 +32,12 @@
             }
 
             @media (max-width: 500px) {
+                .someTask {
+                    max-height: inherit !important;
+                }
+                .someTask p {
+                    height: auto;
+                }
                 .someTask a {
                     font-size: 18px;
                 }
@@ -36,7 +46,7 @@
         <div class="max-w-[1540px] mx-auto flex flex-col gap-[30px] tasksContainer">
             @foreach($author as $user)
                 @if(auth()->user()->id === $user->id)
-                    <div class="flex flex-col gap-5 absolute right-[50px] bottom-[50px]">
+                    <div class="flex flex-col gap-5 fixed right-[50px] bottom-[50px]">
                         <a href="{{route('adminGroupTasks', $group->id)}}"
                            class="bg-[#1BD39E] w-[50px] h-[50px] rounded-xl flex items-center justify-center hover:scale-95 duration-500">
                             <svg xmlns="http://www.w3.org/2000/svg" width="40px" height="40px" viewBox="0 0 24 24"
@@ -88,10 +98,10 @@
                                 <h3 class="text-[#c9c9c9] text-[25px] font-medium">{{$item->name}}</h3>
                                 <p class="font-medium text-[#1BD39E] text-[18px]">{{$item->price}} б.</p>
                             </div>
-                            <p class="text-white text-[20px] ">{{$item->description}}</p>
+                            <p class="text-white text-[20px]">{{$item->description}}</p>
                             <div class="flex justify-between items-center">
                                 <a href="{{route('task', ['group' => $group->id, 'task' => $item->id])}}"
-                                   class="w-full h-[60px] font-medium text-[20px] rounded-[15px] flex items-center justify-center bg-[#1BD39E]">
+                                   class="w-full h-[60px] font-medium text-[20px] rounded-[15px] flex items-center justify-center bg-[#1BD39E] hover:scale-95 duration-500">
                                     Отправить на проверку
                                 </a>
                             </div>

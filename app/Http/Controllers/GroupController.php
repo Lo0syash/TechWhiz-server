@@ -116,17 +116,18 @@ class GroupController extends Controller
     public function submitTaskAnswer(Request $request, Group $group, Tasks $task)
     {
         $validatedData = $request->validate([
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:5120',
+            'images.*' => 'image|max:20480',
+            'images' => 'array|max:4',
             'description' => 'required|string|max:255',
         ]);
-
+    
         $taskUser = new TasksUser();
         $taskUser->user_id = auth()->user()->id;
         $taskUser->groups_id = $group->id;
         $taskUser->tasks_id = $task->id;
         $taskUser->status = 'pending';
         $taskUser->description = $request->description;
-
+    
         if ($request->hasFile('images')) {
             $imagePaths = [];
             foreach ($request->file('images') as $image) {
@@ -136,11 +137,12 @@ class GroupController extends Controller
             }
             $taskUser->image_paths = json_encode($imagePaths);
         }
-
+    
         $taskUser->save();
-
-        return redirect()->route('tasks', $group->id);
+    
+        return redirect()->route('tasks', ['group' => $group->id]);
     }
+    
 
     public function groups(Request $request, UsersGroups $usersGroups, ApplicationForMemdership $applicationForMemdership)
     {

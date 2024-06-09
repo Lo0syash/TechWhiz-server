@@ -5,9 +5,6 @@
         <div class="decorticationElement"></div>
         <div class="container relative z-50">
             <h1 class="font-bold text-4xl mb-5 text-center">Авторизация</h1>
-            @error('Invalid_credential')
-                <p class="text-red-500">{{$message}}</p>
-            @enderror
             <form
                 action="{{route('loginPost')}}"
                 method="post"
@@ -40,6 +37,9 @@
                     value="Войти"
                     class="w-96 h-14 rounded-[1rem] cursor-pointer bg-black text-white duration-500 uppercase font-bold text-xl hover:scale-95"
                 >
+                @error('Invalid_credential')
+                    <p class="text-red-500">{{$message}}</p>
+                @enderror
             </form>
         </div>
     </section>

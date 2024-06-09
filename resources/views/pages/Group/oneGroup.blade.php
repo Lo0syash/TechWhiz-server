@@ -366,30 +366,32 @@
                                                         Выполнить
                                                     </button>
                                                 </form>
-                                                <form action="" method="post" class="flex">
-                                                    @csrf
-                                                    <input type="hidden" name="id">
-                                                    <button type="submit">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
-                                                             viewBox="0 0 28 28" fill="none">
+                                                @if ($checkUser->id !== auth()->user()->id)
+                                                    <form action="" method="post" class="flex">
+                                                        @csrf
+                                                        <input type="hidden" name="id">
+                                                        <button type="submit">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                                                                viewBox="0 0 28 28" fill="none">
+                                                                <path
+                                                                    d="M0 14C0 16.7689 0.821086 19.4757 2.35943 21.778C3.89777 24.0803 6.08427 25.8747 8.64243 26.9343C11.2006 27.9939 14.0155 28.2712 16.7313 27.731C19.447 27.1908 21.9416 25.8574 23.8995 23.8995C25.8574 21.9416 27.1908 19.447 27.731 16.7313C28.2712 14.0155 27.9939 11.2006 26.9343 8.64243C25.8747 6.08427 24.0803 3.89777 21.778 2.35943C19.4757 0.821086 16.7689 0 14 0C10.287 0 6.72601 1.475 4.1005 4.1005C1.475 6.72601 0 10.287 0 14ZM23.15 21.75L6.25 4.85C8.55064 2.935 11.4839 1.94898 14.4742 2.08546C17.4644 2.22195 20.2957 3.47108 22.4123 5.5877C24.5289 7.70432 25.7781 10.5356 25.9145 13.5258C26.051 16.5161 25.065 19.4494 23.15 21.75ZM6.24 23.16C3.81832 21.1035 2.311 18.1706 2.04856 15.0044C1.78612 11.8382 2.78997 8.69715 4.84 6.27L21.73 23.16C19.5642 24.99 16.8204 25.994 13.985 25.994C11.1496 25.994 8.40577 24.99 6.24 23.16Z"
+                                                                    fill="white"/>
+                                                            </svg>
+                                                        </button>
+                                                    </form>
+                                                    <div class="openModalTransaction cursor-pointer"
+                                                        data-user-id="{{ $checkUser->id }}"
+                                                        data-user-name="{{ $checkUser->name }}"
+                                                        data-user-surname="{{ $checkUser->surname }}">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="30"
+                                                            viewBox="0 0 32 30" fill="none">
                                                             <path
-                                                                d="M0 14C0 16.7689 0.821086 19.4757 2.35943 21.778C3.89777 24.0803 6.08427 25.8747 8.64243 26.9343C11.2006 27.9939 14.0155 28.2712 16.7313 27.731C19.447 27.1908 21.9416 25.8574 23.8995 23.8995C25.8574 21.9416 27.1908 19.447 27.731 16.7313C28.2712 14.0155 27.9939 11.2006 26.9343 8.64243C25.8747 6.08427 24.0803 3.89777 21.778 2.35943C19.4757 0.821086 16.7689 0 14 0C10.287 0 6.72601 1.475 4.1005 4.1005C1.475 6.72601 0 10.287 0 14ZM23.15 21.75L6.25 4.85C8.55064 2.935 11.4839 1.94898 14.4742 2.08546C17.4644 2.22195 20.2957 3.47108 22.4123 5.5877C24.5289 7.70432 25.7781 10.5356 25.9145 13.5258C26.051 16.5161 25.065 19.4494 23.15 21.75ZM6.24 23.16C3.81832 21.1035 2.311 18.1706 2.04856 15.0044C1.78612 11.8382 2.78997 8.69715 4.84 6.27L21.73 23.16C19.5642 24.99 16.8204 25.994 13.985 25.994C11.1496 25.994 8.40577 24.99 6.24 23.16Z"
-                                                                fill="white"/>
+                                                                d="M11 15L1 22M1 22L11 29M1 22H31M21 1L31 8M31 8L21 15M31 8H1"
+                                                                stroke="white" stroke-width="1.6" stroke-linecap="round"
+                                                                stroke-linejoin="round"/>
                                                         </svg>
-                                                    </button>
-                                                </form>
-                                                <div class="openModalTransaction cursor-pointer"
-                                                     data-user-id="{{ $checkUser->id }}"
-                                                     data-user-name="{{ $checkUser->name }}"
-                                                     data-user-surname="{{ $checkUser->surname }}">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="30"
-                                                         viewBox="0 0 32 30" fill="none">
-                                                        <path
-                                                            d="M11 15L1 22M1 22L11 29M1 22H31M21 1L31 8M31 8L21 15M31 8H1"
-                                                            stroke="white" stroke-width="1.6" stroke-linecap="round"
-                                                            stroke-linejoin="round"/>
-                                                    </svg>
-                                                </div>
+                                                    </div>
+                                                @endif
                                             @endif
                                         @endforeach
                                         <div

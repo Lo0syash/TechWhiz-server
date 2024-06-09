@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('groups_id')->constrained('groups');
             $table->string('sum');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->text('tasks')->nullable();
             $table->timestamps();
         });
