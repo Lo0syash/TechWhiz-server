@@ -2,6 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Tinify\Tinify;
+use Tinify\Source;
+use Tinify\AccountException;
+use Tinify\ClientException;
+use Tinify\ServerException;
+use Tinify\ConnectionException;
 use App\Http\Requests\Group\CreateGroup;
 use App\Http\Requests\Group\UpdateGroup;
 use App\Http\Requests\Task\CreateTaskRequest;
@@ -131,12 +137,29 @@ class GroupController extends Controller
         if ($request->hasFile('images')) {
             $imagePaths = [];
             foreach ($request->file('images') as $image) {
-                $imageName = time().'_'.$image->getClientOriginalName();
+                $imageName = time() . '_' . $image->getClientOriginalName();
                 $image->move(public_path('images'), $imageName);
-                $imagePaths[] = '/images/'.$imageName;
+                $imagePaths[] = '/images/' . $imageName;
+        
+                try {
+                    Tinify::setKey(env("TINIFY_API_KEY")); // Правильный вызов функции установки ключа
+                    $source = Source::fromFile(public_path('images') . '/' . $imageName); // Исправлен путь к файлу
+                    $source->toFile(public_path('images') . '/' . $imageName); // Исправлен путь к файлу
+                } catch (AccountException $e) {
+                    return redirect()->route('ROUTE_NAME_HERE')->with('error', $e->getMessage()); // Исправлено на route()
+                } catch (ClientException $e) {
+                    return redirect()->route('ROUTE_NAME_HERE')->with('error', $e->getMessage()); // Исправлено на route()
+                } catch (ServerException $e) {
+                    return redirect()->route('ROUTE_NAME_HERE')->with('error', $e->getMessage()); // Исправлено на route()
+                } catch (ConnectionException $e) {
+                    return redirect()->route('ROUTE_NAME_HERE')->with('error', $e->getMessage()); // Исправлено на route()
+                } catch (Exception $e) {
+                    return redirect()->route('ROUTE_NAME_HERE')->with('error', $e->getMessage()); // Исправлено на route()
+                }
             }
             $taskUser->image_paths = json_encode($imagePaths);
         }
+        
     
         $taskUser->save();
     
