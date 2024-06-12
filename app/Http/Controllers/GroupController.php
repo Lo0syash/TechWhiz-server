@@ -37,8 +37,27 @@ class GroupController extends Controller
 
         $groupTasks = Tasks::where('group_id', $group->id)->get();
 
+        $groupTaskIds = $groupTasks->pluck('id')->toArray();
 
-        return view('pages.Group.tasks', compact('group', 'author', 'groupTasks'));
+        $userPendingTaskStatus = TasksUser::where('user_id', auth()->user()->id)
+            ->whereIn('tasks_id', $groupTaskIds)
+            ->where('groups_id', $group->id)
+            ->where('status', 'pending')
+            ->get();
+        $userRejectedTaskStatus = TasksUser::where('user_id', auth()->user()->id)
+            ->whereIn('tasks_id', $groupTaskIds)
+            ->where('groups_id', $group->id)
+            ->where('status', 'reject')
+            ->get();
+        $userAcceptedTaskStatus = TasksUser::where('user_id', auth()->user()->id)
+            ->whereIn('tasks_id', $groupTaskIds)
+            ->where('groups_id', $group->id)
+            ->where('status', 'true')
+            ->get();
+
+        $tasksDate = Tasks::whereIn('id', $groupTaskIds)->get()->keyBy('id');
+
+        return view('pages.Group.tasks', compact('group', 'author', 'groupTasks', 'userPendingTaskStatus', 'userAcceptedTaskStatus', 'userRejectedTaskStatus' ,'tasksDate'));
     }
 
     public function task(Group $group, Tasks $task)
@@ -114,7 +133,7 @@ class GroupController extends Controller
     public function closeSubmitTask(TasksUser $task, User $user)
     {
         $taskData = TasksUser::where('id', $task->id)->where('user_id', $user->id)->firstOrFail();
-        $taskData->status = 'false';
+        $taskData->status = 'reject';
         $taskData->save();
         return redirect()->route('adminGroupTasks', $taskData->groups_id);
     }

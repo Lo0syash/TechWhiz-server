@@ -80,34 +80,123 @@
                     <h1 class="font-medium text-[40px] text-white">Задачи</h1>
                     <div class="flex items-center gap-[20px] func-content--filter">
                         <a href="{{route('tasks', $group->id)}}"
-                           class="filter <?=(isset($_GET['completed']) || isset($_GET['topical']) || isset($_GET['expecting'])) ? '' : 'active'?>">Все</a>
-                        <a href="?topical" class="filter <?=(isset($_GET['topical'])) ? 'active' : ''?>">Отклонены</a>
-                        <a href="?expecting" class="filter <?=(isset($_GET['expecting'])) ? 'active' : ''?>">Ожидают
-                            проверки</a>
+                           class="filter <?=(!isset($_GET['completed']) && !isset($_GET['rejected']) && !isset($_GET['expecting'])) ? 'active' : ''?>">Все</a>
                         <a href="?completed"
                            class="filter <?=(isset($_GET['completed'])) ? 'active' : ''?>">Выполненные</a>
+                        <a href="?expecting" class="filter <?=(isset($_GET['expecting'])) ? 'active' : ''?>">Ожидают
+                            проверки</a>
+                        <a href="?rejected" class="filter <?=(isset($_GET['rejected'])) ? 'active' : ''?>">Отклонены</a>
                     </div>
                 </div>
+                @if (!isset($_GET['rejected']) && !isset($_GET['expecting']) && !isset($_GET['completed']))
                 <div class="flex gap-5 flex-wrap">
                     @if($groupTasks->count() <= 0)
-                        <p class="text-white text-2xl font-medium absolute">В данный момент, заявок нет</p>
+                        <p class="text-white text-2xl font-medium absolute" style="left: 30rem;">В данный момент,
+                            заявок нет</p>
                     @endif
                     @foreach($groupTasks->all() as $item)
-                        <div class="someTask bg-[#3A3A3A] rounded-[20px] p-7 flex flex-col gap-5 w-[500px] max-h-[500px]">
+                        <div
+                            class="someTask bg-[#3A3A3A] rounded-[20px] p-7 flex flex-col gap-5 w-[500px] max-h-[500px]">
                             <div class="flex items-center justify-between">
                                 <h3 class="text-[#c9c9c9] text-[25px] font-medium">{{$item->name}}</h3>
                                 <p class="font-medium text-[#1BD39E] text-[18px]">{{$item->price}} б.</p>
                             </div>
-                            <p class="text-white text-[20px]">{{$item->description}}</p>
+                            <p class="text-white text-[20px] ">{{$item->description}}</p>
                             <div class="flex justify-between items-center">
                                 <a href="{{route('task', ['group' => $group->id, 'task' => $item->id])}}"
-                                   class="w-full h-[60px] font-medium text-[20px] rounded-[15px] flex items-center justify-center bg-[#1BD39E] hover:scale-95 duration-500">
+                                   class="w-full h-[60px] font-medium text-[20px] rounded-[15px] flex items-center justify-center bg-[#1BD39E]">
                                     Отправить на проверку
                                 </a>
                             </div>
                         </div>
                     @endforeach
                 </div>
+            @endif
+            @if (isset($_GET['rejected']))
+                <div class="flex gap-5 flex-wrap">
+                    @if($userRejectedTaskStatus->count() <= 0)
+                        <p class="text-white text-2xl font-medium absolute">неты не принятых отчетов</p>
+                    @endif
+                    @foreach($userRejectedTaskStatus->all() as $item)
+                        @php
+                            $itemDate = $tasksDate->get($item->tasks_id);
+                        @endphp
+                        @if($itemDate)
+                            <div
+                                class="someTask bg-[#3A3A3A] rounded-[20px] p-7 flex flex-col gap-5 w-[500px] max-h-[500px]">
+                                <div class="flex items-center justify-between">
+                                    <h3 class="text-[#c9c9c9] text-[25px] font-medium">{{($itemDate->name)}}</h3>
+                                    <p class="font-medium text-[#1BD39E] text-[18px]">{{$itemDate->price}} б.</p>
+                                </div>
+                                <p class="text-white text-[20px] ">{{$itemDate->description}}</p>
+                                <div class="flex justify-between items-center">
+                                    <div
+                                        class="w-full h-[60px] font-medium text-[20px] rounded-[15px] flex items-center justify-center bg-red-500 text-white">
+                                        Отчет был отклонен
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+            @endif
+            @if (isset($_GET['expecting']))
+                <div class="flex gap-5 flex-wrap">
+                    @if($userPendingTaskStatus->count() <= 0)
+                        <p class="text-white text-2xl font-medium absolute">В данный момент,
+                            нет отправленных отчетов</p>
+                    @endif
+                    @foreach($userPendingTaskStatus->all() as $item)
+                        @php
+                            $itemDate = $tasksDate->get($item->tasks_id);
+                        @endphp
+                        @if($itemDate)
+                            <div
+                                class="someTask bg-[#3A3A3A] rounded-[20px] p-7 flex flex-col gap-5 w-[500px] max-h-[500px]">
+                                <div class="flex items-center justify-between">
+                                    <h3 class="text-[#c9c9c9] text-[25px] font-medium">{{($itemDate->name)}}</h3>
+                                    <p class="font-medium text-[#1BD39E] text-[18px]">{{$itemDate->price}} б.</p>
+                                </div>
+                                <p class="text-white text-[20px] ">{{$itemDate->description}}</p>
+                                <div class="flex justify-between items-center">
+                                    <div
+                                        class="w-full h-[60px] font-medium text-[20px] rounded-[15px] flex items-center justify-center bg-[#1BD39E]">
+                                        Отправлено на проверку
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+            @endif
+            @if (isset($_GET['completed']))
+                <div class="flex gap-5 flex-wrap">
+                    @if($userAcceptedTaskStatus->count() <= 0)
+                        <p class="text-white text-2xl font-medium absolute">Нет принятых работ</p>
+                    @endif
+                    @foreach($userAcceptedTaskStatus->all() as $item)
+                        @php
+                            $itemDate = $tasksDate->get($item->tasks_id);
+                        @endphp
+                        @if($itemDate)
+                            <div
+                                class="someTask bg-[#3A3A3A] rounded-[20px] p-7 flex flex-col gap-5 w-[500px] max-h-[500px]">
+                                <div class="flex items-center justify-between">
+                                    <h3 class="text-[#c9c9c9] text-[25px] font-medium">{{($itemDate->name)}}</h3>
+                                    <p class="font-medium text-[#1BD39E] text-[18px]">{{$itemDate->price}} б.</p>
+                                </div>
+                                <p class="text-white text-[20px] ">{{$itemDate->description}}</p>
+                                <div class="flex justify-between items-center">
+                                    <div
+                                        class="w-full h-[60px] font-medium text-[20px] rounded-[15px] flex items-center justify-center bg-[#1BD39E]">
+                                        Отчет был принят
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+            @endif
             </div>
         </div>
     </section>
