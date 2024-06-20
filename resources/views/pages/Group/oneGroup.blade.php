@@ -367,18 +367,14 @@
                                                     </button>
                                                 </form>
                                                 @if ($checkUser->id !== auth()->user()->id)
-                                                    <form action="" method="post" class="flex">
-                                                        @csrf
-                                                        <input type="hidden" name="id">
-                                                        <button type="submit">
+                                                        <a href="{{route('deleteUserGroup', ['group' => $group->id, 'user' => $checkUser->id])}}">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
                                                                 viewBox="0 0 28 28" fill="none">
                                                                 <path
-                                                                    d="M0 14C0 16.7689 0.821086 19.4757 2.35943 21.778C3.89777 24.0803 6.08427 25.8747 8.64243 26.9343C11.2006 27.9939 14.0155 28.2712 16.7313 27.731C19.447 27.1908 21.9416 25.8574 23.8995 23.8995C25.8574 21.9416 27.1908 19.447 27.731 16.7313C28.2712 14.0155 27.9939 11.2006 26.9343 8.64243C25.8747 6.08427 24.0803 3.89777 21.778 2.35943C19.4757 0.821086 16.7689 0 14 0C10.287 0 6.72601 1.475 4.1005 4.1005C1.475 6.72601 0 10.287 0 14ZM23.15 21.75L6.25 4.85C8.55064 2.935 11.4839 1.94898 14.4742 2.08546C17.4644 2.22195 20.2957 3.47108 22.4123 5.5877C24.5289 7.70432 25.7781 10.5356 25.9145 13.5258C26.051 16.5161 25.065 19.4494 23.15 21.75ZM6.24 23.16C3.81832 21.1035 2.311 18.1706 2.04856 15.0044C1.78612 11.8382 2.78997 8.69715 4.84 6.27L21.73 23.16C19.5642 24.99 16.8204 25.994 13.985 25.994C11.1496 25.994 8.40577 24.99 6.24 23.16Z"
+                                                                     d="M0 14C0 16.7689 0.821086 19.4757 2.35943 21.778C3.89777 24.0803 6.08427 25.8747 8.64243 26.9343C11.2006 27.9939 14.0155 28.2712 16.7313 27.731C19.447 27.1908 21.9416 25.8574 23.8995 23.8995C25.8574 21.9416 27.1908 19.447 27.731 16.7313C28.2712 14.0155 27.9939 11.2006 26.9343 8.64243C25.8747 6.08427 24.0803 3.89777 21.778 2.35943C19.4757 0.821086 16.7689 0 14 0C10.287 0 6.72601 1.475 4.1005 4.1005C1.475 6.72601 0 10.287 0 14ZM23.15 21.75L6.25 4.85C8.55064 2.935 11.4839 1.94898 14.4742 2.08546C17.4644 2.22195 20.2957 3.47108 22.4123 5.5877C24.5289 7.70432 25.7781 10.5356 25.9145 13.5258C26.051 16.5161 25.065 19.4494 23.15 21.75ZM6.24 23.16C3.81832 21.1035 2.311 18.1706 2.04856 15.0044C1.78612 11.8382 2.78997 8.69715 4.84 6.27L21.73 23.16C19.5642 24.99 16.8204 25.994 13.985 25.994C11.1496 25.994 8.40577 24.99 6.24 23.16Z"
                                                                     fill="white"/>
                                                             </svg>
-                                                        </button>
-                                                    </form>
+                                                        </a>
                                                     <div class="openModalTransaction cursor-pointer"
                                                         data-user-id="{{ $checkUser->id }}"
                                                         data-user-name="{{ $checkUser->name }}"
@@ -468,7 +464,8 @@
                                             class="transactionBlockContainer w-[547px] flex flex-col gap-[30px] px-[40px] py-[30px] bg-[#3A3A3A] rounded-[20px]">
                                             <div class="w-full flex justify-between transactionBlockContainer-stats">
                                                 <div class="flex flex-col gap-[10px]">
-                                                    <p class="font-bold text-[20px] text-white">{{$user->name}}</p>
+                                                    @foreach($user->all() as $itemUser) @endforeach
+                                                    <p class="font-bold text-[20px] text-white">{{ $itemUser->surname }} {{ $itemUser->name }}</p>
                                                     <p class="font-medium text-[18px] text-[#DCDCDC]">{{$group->name}}</p>
                                                 </div>
                                                 <div
@@ -495,7 +492,8 @@
                                             class="transactionBlockContainer w-[547px] flex flex-col gap-[30px] px-[40px] py-[30px] bg-[#3A3A3A] rounded-[20px]">
                                             <div class="w-full flex justify-between transactionBlockContainer-stats">
                                                 <div class="flex flex-col gap-[10px]">
-                                                    <p class="font-bold text-[20px] text-white">{{ $user->name}}</p>
+                                                    @foreach($user->all() as $itemUser) @endforeach
+                                                    <p class="font-bold text-[20px] text-white">{{ $itemUser->surname }} {{ $itemUser->name }}</p>
                                                     <p class="font-medium text-[18px] text-[#DCDCDC]">{{$group->name}}</p>
                                                 </div>
                                                 <div
@@ -550,7 +548,7 @@
                                 <input type="text" name="name" placeholder="Название" value="{{@$group->name}}"
                                        class="settingInput w-[44.375rem] h-[4.0625rem] border-[#4D4D4D] border-2 rounded-[20px] bg-[#141414] opacity-80 pl-[30px] text-[#7C7C7C] text-[20px] font-medium outline-none">
                                 <input type="text" name="shortDescription" placeholder="Краткое описание"
-                                       value="{{@$group->shortDescription}}"
+                                       value="{{$group->shortDescription}}"
                                        class="settingInput w-[44.375rem] h-[4.0625rem] border-[#4D4D4D] border-2 rounded-[20px] bg-[#141414] opacity-80 pl-[30px] text-[#7C7C7C] text-[20px] font-medium outline-none">
                                 <input type="text" name="activity" placeholder="Деятельность"
                                        value="{{$group->activity}}"
@@ -571,10 +569,13 @@
                             </div>
                             <div class="createGroupContent--container flex flex-col mt-[9px]">
                                 <div
-                                    class="createGroupContent--imageBox relative w-[425px] h-[425px] border-[#4D4D4D] border-2 rounded-[20px] bg-[#141414] opacity-80 cursor-pointer">
+                                    class="createGroupContent--imageBox relative w-[425px] h-[425px] border-[#4D4D4D] border-2 rounded-[20px] bg-[#141414] opacity-80 cursor-pointer" style="display: flex;
+                                    align-items: center;
+                                    justify-content: center;">
                                     <img src="/resources/assets/images/lk/photo-badge.svg" alt="badge"
                                          class="absolute -right-2 -top-2">
-                                    <input type="file" id="fileAddToGorup" class="hidden" name="path">
+                                    <input type="file" id="fileAddToGorup" class="hidden" name="path" value="{{$group->path}}">
+                                    <label for="fileAddToGorup" style="position: absolute; top: 0; right: 0; width: 100%; height: 100%; cursor: pointer;"></label>
                                     <img
                                         src="{{@asset('public' . \Illuminate\Support\Facades\Storage::url($group->path))}}"
                                         class="w-[400px] h-[400px] max-w-[400px] max-h-[400px] object-cover rounded-xl ">

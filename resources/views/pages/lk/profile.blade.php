@@ -20,8 +20,8 @@
                             <h1 class="max-w-[504px] text-[28px] text-black font-medium mt-8 mb-8 leading-[136%]">{{auth()->user()->surname}} {{auth()->user()->name}}</h1>
                             <div class="flex flex-col gap-[14px]">
                                 <p class="font-medium text-[20px] text-black">Почта: {{auth()->user()->email}}</p>
-                                <p class="font-medium text-[20px] text-black">Номер
-                                    телефона: {{(!empty(auth()->user()->phone)) ? auth()->user()->phone : 'Не установлен'}}</p>
+                                {{-- <p class="font-medium text-[20px] text-black">Номер
+                                    телефона: {{(!empty(auth()->user()->phone)) ? auth()->user()->phone : 'Не установлен'}}</p> --}}
                                 @if (!empty(auth()->user()->tg))
                                     <p class="font-medium text-[20px] text-black">Ваш телеграмм: {{auth()->user()->tg}}</p>
                                 @endif

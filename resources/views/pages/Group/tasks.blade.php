@@ -101,7 +101,10 @@
                                 <h3 class="text-[#c9c9c9] text-[25px] font-medium">{{$item->name}}</h3>
                                 <p class="font-medium text-[#1BD39E] text-[18px]">{{$item->price}} б.</p>
                             </div>
-                            <p class="text-white text-[20px] ">{{$item->description}}</p>
+                            <p class="text-white text-[20px] text-ellipsis overflow-hidden" style="display: -webkit-box;
+                            -webkit-box-orient: vertical;
+                            -webkit-line-clamp: 2; max-width: 440px; text-align: justify;
+                            overflow: hidden;">{{$item->description}}</p>
                             <div class="flex justify-between items-center">
                                 <a href="{{route('task', ['group' => $group->id, 'task' => $item->id])}}"
                                    class="w-full h-[60px] font-medium text-[20px] rounded-[15px] flex items-center justify-center bg-[#1BD39E]">
@@ -115,7 +118,7 @@
             @if (isset($_GET['rejected']))
                 <div class="flex gap-5 flex-wrap">
                     @if($userRejectedTaskStatus->count() <= 0)
-                        <p class="text-white text-2xl font-medium absolute">неты не принятых отчетов</p>
+                        <p class="text-white text-2xl font-medium absolute">Нет принятых отчетов</p>
                     @endif
                     @foreach($userRejectedTaskStatus->all() as $item)
                         @php
@@ -128,7 +131,10 @@
                                     <h3 class="text-[#c9c9c9] text-[25px] font-medium">{{($itemDate->name)}}</h3>
                                     <p class="font-medium text-[#1BD39E] text-[18px]">{{$itemDate->price}} б.</p>
                                 </div>
-                                <p class="text-white text-[20px] ">{{$itemDate->description}}</p>
+                                <p class="text-white text-[20px] text-ellipsis overflow-hidden" style="display: -webkit-box;
+                                -webkit-box-orient: vertical;
+                                -webkit-line-clamp: 2; max-width: 440px; text-align: justify;
+                                overflow: hidden;">{{$itemDate->description}}</p>
                                 <div class="flex justify-between items-center">
                                     <div
                                         class="w-full h-[60px] font-medium text-[20px] rounded-[15px] flex items-center justify-center bg-red-500 text-white">
@@ -157,7 +163,10 @@
                                     <h3 class="text-[#c9c9c9] text-[25px] font-medium">{{($itemDate->name)}}</h3>
                                     <p class="font-medium text-[#1BD39E] text-[18px]">{{$itemDate->price}} б.</p>
                                 </div>
-                                <p class="text-white text-[20px] ">{{$itemDate->description}}</p>
+                                <p class="text-white text-[20px] text-ellipsis overflow-hidden" style="display: -webkit-box;
+                                -webkit-box-orient: vertical;
+                                -webkit-line-clamp: 2; max-width: 440px; text-align: justify;
+                                overflow: hidden;">{{$itemDate->description}}</p>
                                 <div class="flex justify-between items-center">
                                     <div
                                         class="w-full h-[60px] font-medium text-[20px] rounded-[15px] flex items-center justify-center bg-[#1BD39E]">
@@ -185,7 +194,10 @@
                                     <h3 class="text-[#c9c9c9] text-[25px] font-medium">{{($itemDate->name)}}</h3>
                                     <p class="font-medium text-[#1BD39E] text-[18px]">{{$itemDate->price}} б.</p>
                                 </div>
-                                <p class="text-white text-[20px] ">{{$itemDate->description}}</p>
+                                <p class="text-white text-[20px] text-ellipsis overflow-hidden" style="display: -webkit-box;
+                                -webkit-box-orient: vertical;
+                                -webkit-line-clamp: 2; max-width: 440px; text-align: justify;
+                                overflow: hidden;">{{$itemDate->description}}</p>
                                 <div class="flex justify-between items-center">
                                     <div
                                         class="w-full h-[60px] font-medium text-[20px] rounded-[15px] flex items-center justify-center bg-[#1BD39E]">

@@ -51,6 +51,8 @@ Route::controller(GroupController::class)->group(function () {
     Route::get('/group/task/{group}/{task}','task')->name('task')->middleware(\App\Http\Middleware\Authenticate::class);
     Route::get('/groups/tasks/edit/{group}', 'adminGroupTasks')->name('adminGroupTasks')->middleware(\App\Http\Middleware\Authenticate::class);
 
+    Route::get('/groups/delete/{group}/{user}', 'deleteUserGroup')->name('deleteUserGroup')->middleware(\App\Http\Middleware\Authenticate::class);
+
     Route::get('/groups/tasks/open/{task}/{group}', 'adminGroupTasksMore')->name('adminGroupTasksMore')->middleware(\App\Http\Middleware\Authenticate::class);
     Route::post('/group/task/close/{task}/{user}','closeSubmitTask')->name('closeSubmitTask')->middleware(\App\Http\Middleware\Authenticate::class);
     Route::post('/group/task/accept/{task}/{user}','acceptSubmitTask')->name('acceptSubmitTask')->middleware(\App\Http\Middleware\Authenticate::class);

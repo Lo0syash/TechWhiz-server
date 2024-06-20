@@ -327,8 +327,6 @@ class GroupController extends Controller
         $data = $updateGroup->validated();
         if ($updateGroup->hasFile('path')) {
             $data['path'] = $updateGroup->file('path')->store('public/product');
-        } else {
-            $data['path'] = 'product/baseGroupImage.png';
         }
 
         if (Group::where('id', $group)->update($data)) {

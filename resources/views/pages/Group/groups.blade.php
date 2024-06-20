@@ -38,8 +38,8 @@
                         </form>
                         <div class="flex items-center gap-[20px] func-content--filter">
                             <a href="{{route('groups')}}"
-                               class="filter <?=(!isset($_GET['by-name'])) ? 'active' : ''?>">Все</a>
-                            <a href="?by-popularity" class="filter">По популярности</a>
+                               class="filter <?=(!isset($_GET['by-name']) && !isset($_GET['by-popularity'])) ? 'active' : ''?>">Все</a>
+                            <a href="?by-popularity" class="filter <?=(isset($_GET['by-popularity'])) ? 'active' : ''?>">По популярности</a>
                             <a href="?by-name" class="filter <?=(isset($_GET['by-name'])) ? 'active' : ''?>">По
                                 названию</a>
                         </div>
@@ -104,7 +104,7 @@
                                             <h2 class="text-white max-w-[300px] font-bold text-[32px] mt-5 mb-20 whitespace-nowrap text-ellipsis overflow-hidden">{{ $item->name }}</h2>
                                         </div>
                                         <div
-                                            class="button-roadmap-item-hover absolute right-[30px] bottom-[35px] w-10 h-10 rounded-3xl border-2 border-white flex items-center justify-center cursor-pointer z-10">
+                                            class="button-roadmap-item-hover absolute right-[30px] bottom-[35px] w-10 h-10 rounded-3xl border-2 border-white flex items-center justify-center cursor-pointer z-10" style="z-index: 2;">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="19"
                                                  viewBox="0 0 18 19"
                                                  fill="none">
@@ -136,7 +136,7 @@
         </div>
     </section>
     <div id="confirmationForm"
-         class="hidden fixed top-0 left-0 w-screen h-screen bg-black bg-opacity-50 flex items-center justify-center">
+         class="hidden fixed top-0 left-0 w-screen h-screen bg-black bg-opacity-50 flex items-center justify-center" style="z-index: 10;">
         <div class="confirmationColor p-6 rounded-xl shadow-md">
             <p id="confirmationText" class="text-white"></p>
             <div class="mt-4 flex justify-end">

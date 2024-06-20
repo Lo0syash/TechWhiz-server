@@ -25,7 +25,7 @@ class CreateTaskRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'description' => 'required|string|max:9999',
+            'description' => 'required|string|max:99999',
             'price' => 'required|string',
         ];
     }

@@ -27,7 +27,7 @@ class CreateGroup extends FormRequest
             'name' => 'required|string|min:2|max:255',
             'shortDescription' => 'required|string|min:5|max:255',
             'activity' => 'required|string|min:2|max:255',
-            'description' => 'required|string|min:5|max:9999',
+            'description' => 'required|string|min:5|max:999999',
             'status' => 'required|string',
             'path' => 'image|max:5120',
             'inviteCode' => 'string|min:2|max:255'
